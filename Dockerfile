@@ -138,7 +138,7 @@ RUN cp packages/db/dist/schema.prisma apps/portal/prisma/schema.prisma
 RUN cd apps/portal && bunx prisma generate --schema=prisma/schema.prisma
 
 # Build workspace dependencies in dependency order
-RUN cd packages/db && node scripts/generate-prisma-client-js.js && tsc
+RUN cd packages/db && node scripts/generate-prisma-client-js.js && bunx tsc
 RUN cd packages/auth && bun run build
 RUN cd packages/company && bunx tsup src/index.ts --format cjs,esm --no-dts
 
