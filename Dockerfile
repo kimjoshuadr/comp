@@ -143,7 +143,7 @@ ENV NEXT_PUBLIC_BETTER_AUTH_URL=$NEXT_PUBLIC_BETTER_AUTH_URL \
 
 # Build workspace dependencies first
 RUN cd packages/auth && bun run build
-RUN cd packages/company && bun run build
+RUN cd packages/company && bunx tsup src/index.ts --format cjs,esm --no-dts
 
 # Build the portal
 RUN cd apps/portal && SKIP_ENV_VALIDATION=true bun run build:docker
