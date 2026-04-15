@@ -142,6 +142,7 @@ ENV NEXT_PUBLIC_BETTER_AUTH_URL=$NEXT_PUBLIC_BETTER_AUTH_URL \
     NODE_OPTIONS=--max_old_space_size=6144
 
 # Build workspace dependencies first
+RUN cd packages/db && bun run build
 RUN cd packages/auth && bun run build
 RUN cd packages/company && bunx tsup src/index.ts --format cjs,esm --no-dts
 
