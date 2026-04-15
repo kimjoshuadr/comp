@@ -18,6 +18,11 @@ COPY packages/utils/package.json ./packages/utils/
 COPY packages/tsconfig/package.json ./packages/tsconfig/
 COPY packages/analytics/package.json ./packages/analytics/
 COPY packages/db/package.json ./packages/db/
+COPY packages/auth/package.json ./packages/auth/
+COPY packages/company/package.json ./packages/company/
+COPY packages/device-agent/package.json ./packages/device-agent/
+COPY packages/docs/package.json ./packages/docs/
+COPY packages/framework-editor-cli/package.json ./packages/framework-editor-cli/
 
 # Copy app package.json files
 COPY apps/app/package.json ./apps/app/
