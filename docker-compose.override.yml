@@ -25,6 +25,10 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
 
   portal:
+    build:
+      args:
+        PRISMA_SKIP_POSTINSTALL_GENERATE: "true"
+        npm_config_ignore_scripts: "true"
     env_file: []
     environment:
       DATABASE_URL: ${DATABASE_URL}
