@@ -134,6 +134,16 @@ COPY --from=deps /app/node_modules ./node_modules
 RUN cd packages/db && node scripts/combine-schemas.js
 RUN cp packages/db/dist/schema.prisma apps/portal/prisma/schema.prisma
 
+# Generate Prisma client with combined schema
+RUN cd apps/portal && bunx prisma generate --schema=prisma/schema.prisma
+
+# Build workspace dependencies first
+RUN cd packages/auth && bun run build
+RUN cd packages/company && bunx tsup src/index.ts --format cjs,esm --no-dts
+
+# Build the portal
+RUN cd apps/portal && SKIP_ENV_VALIDATION=true bun run build:docker
+
 # Ensure Next build has required public env at build-time
 ARG NEXT_PUBLIC_BETTER_AUTH_URL
 ENV NEXT_PUBLIC_BETTER_AUTH_URL=$NEXT_PUBLIC_BETTER_AUTH_URL \
